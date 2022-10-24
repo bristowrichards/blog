@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Bristow Richards">
+<meta name="dcterms.date" content="2022-10-24">
+
+<title>Bristow Richards - Creating a Project Network Diagram</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="../../site_libs/viz-1.8.2/viz.js"></script>
+<link href="../../site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="../../site_libs/grViz-binding-1.0.9/grViz.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Bristow Richards</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">About</a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/bristowrichards"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/bristowrichards"><i class="bi bi-twitter" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/bristow-richards/"><i class="bi bi-linkedin" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Creating a Project Network Diagram</h1>
+            <p class="subtitle lead"></p><p>A messy workflow for inheriting a messy data project</p><p></p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">project management</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Bristow Richards </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 24, 2022</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inheriting-a-messy-project" id="toc-inheriting-a-messy-project" class="nav-link active" data-scroll-target="#inheriting-a-messy-project">Inheriting a messy project</a></li>
+  <li><a href="#enter-graphs" id="toc-enter-graphs" class="nav-link" data-scroll-target="#enter-graphs">Enter: graphs</a></li>
+  <li><a href="#the-diagrammer-package" id="toc-the-diagrammer-package" class="nav-link" data-scroll-target="#the-diagrammer-package">The DiagrammeR package</a></li>
+  <li><a href="#the-workflow" id="toc-the-workflow" class="nav-link" data-scroll-target="#the-workflow">The workflow</a></li>
+  <li><a href="#a-simple-example" id="toc-a-simple-example" class="nav-link" data-scroll-target="#a-simple-example">A simple example</a></li>
+  <li><a href="#documenting-a-real-world-example" id="toc-documenting-a-real-world-example" class="nav-link" data-scroll-target="#documenting-a-real-world-example">Documenting: a real-world example</a></li>
+  <li><a href="#rendering-my-real-life-example" id="toc-rendering-my-real-life-example" class="nav-link" data-scroll-target="#rendering-my-real-life-example">Rendering my real-life example</a></li>
+  <li><a href="#exporting-diagrams" id="toc-exporting-diagrams" class="nav-link" data-scroll-target="#exporting-diagrams">Exporting Diagrams</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further reading</a></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="inheriting-a-messy-project" class="level2">
+<h2 class="anchored" data-anchor-id="inheriting-a-messy-project">Inheriting a messy project</h2>
+<p>I was working on a data project that was at once meticulously organized and impossibly messy. There were no problems with the code, the repository structure, or the documentation. The problem was knowledge transfer. The author of the project had left my organization before I began, and no one had really looked over his code to ask him questions before he left.</p>
+<p>The project combined many independent files from sources that required users to manually pull data, and the files would often have irregular formatting or other government-produced spreadsheet idiosyncrasies that made it impossible to fully automate the data acquisition process. Still, the project housed scripts that automated everything else the data sources needed to be combined, making the final product itself as reproducible as possible.</p>
+<p>I was tasked with better documenting the dozens of files, scripts, and utilities so that staff could more easily maintain this repository going forward. I had very little background in the subject matter of the data project and had no idea where to begin. I started scribbling down the names of scripts on a piece of paper and drawing lines between them. It wasn’t long before I looked like a conspiracy theorist at the central of a devious plot of Census data and HUD variable refactoring. I knew there had to be a better way.</p>
+</section>
+<section id="enter-graphs" class="level2">
+<h2 class="anchored" data-anchor-id="enter-graphs">Enter: graphs</h2>
+<p>I decided to try using a network diagram rendered from a graph. In most data projects, “graph” means “mapping data to aesthetics to visually represent data features” like a barplot or scatterplot. No, I am not using <code>ggplot</code> today. Rather, I am going to use the discrete math definition of a graph, in the sense of representing the relationship between unique entities (<a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">read more</a>).</p>
+<p>In a graph, you define “nodes” (entities of interest to you) and “edges” (their relationships). It looks like <a href="#fig-simplegraph">Figure&nbsp;1</a>:</p>
+<div class="cell">
+<div id="fig-simplegraph" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div id="htmlwidget-af00b6ff5a070b958ce4" style="width:100%;height:325px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-af00b6ff5a070b958ce4">{"x":{"diagram":"\ngraph {\n  node [shape = circle,\n        fontname = Helvetica,\n        fontsize = 12]\n        \n  A--B\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p></p><figcaption class="figure-caption">Figure 1: A simple graph</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>This figure represents a graph. It shows that there exist two nodes <code>A</code> and <code>B</code>, and that there exists a single edge relating the two. This image says: “A and B are related.”</p>
+<p>This graph is not helpful to me, because my network of datasets and scripts <em>does</em> have directed relationships. I can’t just say “script 3 and dataset 3 are related.” I need to say “script 3 <em>creates</em> dataset 3.” This is fine, though, because edges can have directions if you specify. Something like <a href="#fig-simpledigraph">Figure&nbsp;2</a> would represent my issue.</p>
+<div class="cell">
+<div id="fig-simpledigraph" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div id="htmlwidget-e78c8245d6e80e9f5b4e" style="width:100%;height:325px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e78c8245d6e80e9f5b4e">{"x":{"diagram":"\ndigraph {\n  node [shape = circle,\n        fontname = Helvetica,\n        fontsize = 12]\n        \n  script_3->dataset_3\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p></p><figcaption class="figure-caption">Figure 2: A simple directed graph</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>This figure seems closer to what I want to accomplish in documenting my complicated project. The directed edge could mean a number of things. Here, I meant for it to say “script 3 creates dataset 3,” though this is not always what an edge means. In a large messy repository of many scripts and intermediate utilities, scripts might have many inputs to represent. For example, in part of my project, there was a script which pulled in source data and modified it according to a dictionary .json object which had been produced by another project and which (importantly!) would never be modified. This script combined the source data and the dictionary to produce clean data. I call most input objects “utils” if they are not regular tabulated data. This case is represented in <a href="#fig-complexdigraph">Figure&nbsp;3</a>.</p>
+<div class="cell">
+<div id="fig-complexdigraph" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div id="htmlwidget-b54759c3de7ae1127ec1" style="width:100%;height:325px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b54759c3de7ae1127ec1">{"x":{"diagram":"\ndigraph {\n  node [shape = circle,\n        fontname = Helvetica,\n        fontsize = 12]\n        \n  dict_util->script\n  source->script\n  script->clean_data\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p></p><figcaption class="figure-caption">Figure 3: A more complex directed graph</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>Now, it is more apparent that a directed edge is probably best translated to “informs” or “is used in.” The above image says “there exists a <code>script</code> which is informed by <code>source</code> and <code>dict_util</code> and which informs a dataset called <code>clean_data</code>.” This is the kind of image which I want to represent my repository so I can track how everything relates.</p>
+<p>To be pedantic, these images are <em>not</em> the graphs. Graphs are abstract math models for conceiving relationships. These images are <em>rendered representations</em> of graphs. It would be easy for someone to read <a href="#fig-simplegraph">Figure&nbsp;1</a> and say <code>A</code> is “above” or otherwise related in a hierarchy to <code>B</code>. That could have been my intention, but in this instance it was an arbitrary choice of my program when it decided to render the graph object <code>"A--B"</code>.</p>
+<p>This divorce between abstract relationships and visual representations is an important one. You can create graphs and investigate relational properties between nodes without ever rendering the graph visually. Rendering graphs visually is, of course, important for communicating relationships and meaning to others. I could feed the graph from <a href="#fig-complexdigraph">Figure&nbsp;3</a> into a program and, instead of rendering it, perform actions like “show me all antecedents to <code>script</code>” or “show me how many nodes separate <code>source</code> and <code>clean_data</code> from each other.” For more reading about graph data science, I highly recommend <a href="https://towardsdatascience.com/twitchverse-a-network-analysis-of-twitch-universe-using-neo4j-graph-data-science-d7218b4453ff">this blog post</a> in which Tomaz Bratanic uses graphs to represent and analyze streamers on the Twitch platform.</p>
+<p>In the end, though, I’m not a graph data scientist. I’m a busy intern who needs to document a repository. So, I will now cease using any distinction between a graph and its visual representation, and I will get back to the project at hand: making a graph diagram.</p>
+</section>
+<section id="the-diagrammer-package" class="level2">
+<h2 class="anchored" data-anchor-id="the-diagrammer-package">The DiagrammeR package</h2>
+<p>We need to create an informative visual representation of a network which can probably be modeled well using a directed graph. Like can be said for most things, there is an R package that can help us with this niche problem. The <a href="https://rich-iannone.github.io/DiagrammeR/">DiagrammeR package</a> handles a number of analytic tasks related to graphs, including constructing graphs from dataframes of nodes and edges, querying graphs for relationships between nodes, and visually representing graphs in diagrams like the figures above. My main focus being the visual representation of my graph, I used the <code>grViz()</code> function to feed a Graphviz handler my graph data in DOT notation. I didn’t understand what that sentence meant two months ago, and I barely understand what it means now, but it goes something like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(<span class="st">"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">digraph {</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="st">  node [shape = circle,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">        fontname = Helvetica,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">        fontsize = 12]</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">        </span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">  dict_util-&gt;script</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">  source-&gt;script</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">  script-&gt;clean_data</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-complexdigraph_code" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div id="htmlwidget-1add70240708922cdabf" style="width:100%;height:325px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1add70240708922cdabf">{"x":{"diagram":"\ndigraph {\n  node [shape = circle,\n        fontname = Helvetica,\n        fontsize = 12]\n        \n  dict_util->script\n  source->script\n  script->clean_data\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p></p><figcaption class="figure-caption">Figure 4: A more complex directed graph, with code</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>In this snippet above, I make three declarations in the form of <code>source-&gt;script</code> to define edges, which implicitly defines the existence of the nodes <code>source</code> and <code>script</code>. I then define general node attributes like shape and font. These are combined in either a <code>graph {}</code> or <code>digraph {}</code> call, depending on whether the graph is undirected or directed (in this case, it is directed, so I use <code>digraph {}</code>). Finally, all of this is then gathered as a large string and passed to <code>grViz()</code>.</p>
+<p>I want to do a little bit more with this. I want to group nodes by color so I can quickly tell which nodes are scripts and which nodes are datasets. Also, I want source datasets to have folder-shaped nodes. This will be helpful later, because some data comes from our organization’s SharePoint and some comes directly from links, and I’d like to distinguish between them. The code below which produces <a href="#fig-colorfuldigraph">Figure&nbsp;5</a> shows how I would manually create such a figure. As I add more details to the aesthetic rendering of the nodes, I start referring to nodes numerically as <code>tab1</code>, <code>tab2</code>, etc. This naming is arbitrary but will help later when I want to handle more nodes. It helps a bit with readability, too, because the node names are all similar in length now.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(<span class="st">"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="st">digraph {</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="st">  node [fontname = Helvetica, style = filled]</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">  tab1 [label = 'source', shape = folder, fillcolor = green]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">  tab2 [label = 'util', shape = rectangle, fillcolor = purple]</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">  tab3 [label = 'script', shape = rectangle, fillcolor = grey]</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">  tab4 [label = 'output', shape = rectangle, fillcolor = green]</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">  </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">  tab1 -&gt; tab3</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">  tab2 -&gt; tab3</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">  tab3 -&gt; tab4</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fig-colorfuldigraph" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<div id="htmlwidget-2f15b4f13c6c2dd7ac1c" style="width:100%;height:325px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2f15b4f13c6c2dd7ac1c">{"x":{"diagram":"\ndigraph {\n  node [fontname = Helvetica, style = filled]\n  \n  tab1 [label = \"source\", shape = folder, fillcolor = green]\n  tab2 [label = \"util\", shape = rectangle, fillcolor = purple]\n  tab3 [label = \"script\", shape = rectangle, fillcolor = grey]\n  tab4 [label = \"output\", shape = rectangle, fillcolor = green]\n  \n  tab1 -> tab3\n  tab2 -> tab3\n  tab3 -> tab4\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p></p><figcaption class="figure-caption">Figure 5: A colorful digraph, with code</figcaption><p></p>
+</figure>
+</div>
+</div>
+<p>The code here is a little awkward and seems like it could have been simplified. It could! But that simplification would only matter if I were manually creating the string argument for the <code>grViz()</code> function. I intend rather to use tabular node and edge data to create a simple string for each node and each edge, then combine these string values into the larger string which <code>grViz()</code> requires. This is definitely the point where I start building up technological debt and the maintenance of my code becomes more difficult than is probably necessary. But! It works.</p>
+</section>
+<section id="the-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="the-workflow">The workflow</h2>
+<p>A wiser version of myself would have investigated the DiagrammeR documentation fully so that I would know how to turn tabular data on nodes and edges into a graph object, then render that graph object by turning some of the node attributes into aesthetic mappings such as color, size, position, and shape. I did no such thing. Instead, after getting a little confused on how to construct and handle diagram objects, I settled for using the Graphviz method which I just demonstrated. The <code>grViz()</code> function takes as its argument a giant string, which declares nodes, edges, and aesthetics. I wanted to be able to store the node and edge data in a separate file, then use this data to construct the string for <code>grViz()</code>, which felt like cheating a bit and led to some bogus-looking code. I decided on the following workflow:</p>
+<ol type="1">
+<li>document the objects in the repository</li>
+<li>document the relationship between these objects</li>
+<li>pull this data into R</li>
+<li>add aesthetic mappings onto the data</li>
+<li>turn that data into a DOT notation string</li>
+<li>pass this string to <code>grViz()</code> and export the resulting figure</li>
+</ol>
+</section>
+<section id="a-simple-example" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-example">A simple example</h2>
+<p>In this example, I do steps 1-4 as short code statements. For my larger project, I ended up using a larger Microsoft Excel document with a worksheet for “nodes” and another for “edges.” Below, I create small dataframe objects for nodes and edges, then I add two aesthetic mappings as new columns onto the nodes dataframe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DiagrammeR)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># input node data</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>nodesdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">'source'</span>, <span class="st">'util'</span>, <span class="st">'script'</span>, <span class="st">'output'</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">category =</span> <span class="fu">c</span>(<span class="st">'data'</span>, <span class="st">'util'</span>, <span class="st">'script'</span>, <span class="st">'data'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># input edge data</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>edgesdf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># edit node data to map category to color and name to shape</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>nodesdf <span class="ot">&lt;-</span> nodesdf <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      category <span class="sc">==</span> <span class="st">'data'</span> <span class="sc">~</span> <span class="st">'green'</span>, <span class="co"># data nodes will be green</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>      category <span class="sc">==</span> <span class="st">'script'</span> <span class="sc">~</span> <span class="st">'grey'</span>, <span class="co"># script nodes are grey</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">'purple'</span> <span class="co"># anything else will be purple</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>      name <span class="sc">==</span> <span class="st">'source'</span> <span class="sc">~</span> <span class="st">'folder'</span>, <span class="co"># source files will be folder-shaped</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">'rectangle'</span> <span class="co"># anything else is a rectangle</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nodesdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id   name category  color     shape
+1  1 source     data  green    folder
+2  2   util     util purple rectangle
+3  3 script   script   grey rectangle
+4  4 output     data  green rectangle</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(edgesdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  from to
+1    1  3
+2    2  3
+3    3  4</code></pre>
+</div>
+</div>
+<p>Next, I will add a new column onto <code>nodesdf</code> to create the necessary string that defines each node’s name, color, and shape. It’s a very ugly use case of a <code>paste()</code> function. Because the eventual argument fed to <code>grViz()</code> is a string, this string which <em>contains</em> strings must use many escape characters to make sure it constructs correctly. I will also add a new column to the <code>edgesdf</code> in a similar fashion.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>nodesdf <span class="ot">&lt;-</span> nodesdf <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">node_label =</span> <span class="fu">paste0</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">'tab'</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      ,id,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">' [label = </span><span class="sc">\'</span><span class="st">'</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>      name, <span class="co"># label str</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">'</span><span class="sc">\'</span><span class="st">, shape = '</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>      shape,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">', fillcolor = '</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      color,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">']'</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(nodesdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id   name category  color     shape
+1  1 source     data  green    folder
+2  2   util     util purple rectangle
+3  3 script   script   grey rectangle
+4  4 output     data  green rectangle
+                                                     node_label
+1    tab1 [label = 'source', shape = folder, fillcolor = green]
+2  tab2 [label = 'util', shape = rectangle, fillcolor = purple]
+3  tab3 [label = 'script', shape = rectangle, fillcolor = grey]
+4 tab4 [label = 'output', shape = rectangle, fillcolor = green]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>edgesdf <span class="ot">&lt;-</span> edgesdf <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge_label =</span> <span class="fu">paste0</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">'tab'</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>      from,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">' -&gt; tab'</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>      to</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(edgesdf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  from to   edge_label
+1    1  3 tab1 -&gt; tab3
+2    2  3 tab2 -&gt; tab3
+3    3  4 tab3 -&gt; tab4</code></pre>
+</div>
+</div>
+<p>Now having constructed the strings which define the nodes and edges, I finalize the portions of the <code>grViz()</code> arguments which come from <code>node</code> and <code>edge</code>. To do this, I use <code>summarize()</code> to collapse many rows into one, using a <code>paste()</code> function as the summary function. It is important to note that the <code>grViz()</code> function expects a new line or some other delimiter between declarations of nodes and edges. For simplicity’s sake, I use a newline character. Important to note: using the <code>print()</code> and the <code>writeLines()</code> functions will result in different handling of newline characters.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define nodes string</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>nodestr <span class="ot">&lt;-</span> nodesdf <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">paste</span>(node_label, <span class="at">collapse =</span> <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>() <span class="co"># we want a string, not a 1x1 dataframe holding a string</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># define edges string</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>edgestr <span class="ot">&lt;-</span> edgesdf <span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">paste</span>(edge_label, <span class="at">collapse =</span> <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># debugging example</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(edgestr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tab1 -&gt; tab3
+tab2 -&gt; tab3
+tab3 -&gt; tab4</code></pre>
+</div>
+</div>
+<p>Finally, we can combine the two string portions we’ve built into the final string argument for <code>grViz()</code>. I write this to an intermediate object <code>graphstr</code> which I can then pass to the rendering function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># include some parameters then pass string literals</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>graphstr <span class="ot">=</span> <span class="fu">paste</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"digraph {</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="st">  node [fontname = Helvetica, style = filled]"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  nodestr,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  edgestr,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'}'</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">'</span><span class="sc">\n</span><span class="st">'</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(graphstr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-6d9941f66eede84cc500" style="width:100%;height:325px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6d9941f66eede84cc500">{"x":{"diagram":"digraph {\n  node [fontname = Helvetica, style = filled]\ntab1 [label = \"source\", shape = folder, fillcolor = green]\ntab2 [label = \"util\", shape = rectangle, fillcolor = purple]\ntab3 [label = \"script\", shape = rectangle, fillcolor = grey]\ntab4 [label = \"output\", shape = rectangle, fillcolor = green]\ntab1 -> tab3\ntab2 -> tab3\ntab3 -> tab4\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>We did it! We found a pretty wonky workflow to turn tabular node and edge data into a graph, including turning node attributes into visual aesthetics for the rendered graph. I am <strong>certain</strong> there is a simpler way to do this, but I found this problem easier to solve when I knew what I wanted the <code>grViz()</code> call to look like and reverse-engineered that string from my data.</p>
+</section>
+<section id="documenting-a-real-world-example" class="level2">
+<h2 class="anchored" data-anchor-id="documenting-a-real-world-example">Documenting: a real-world example</h2>
+<p>For my project, I documented anything that seemed like an important “moving part.” This included any source data links, each script, any important packages, any intermediate datasets (that a project user would have saved to their machine as part of the steps of running each script in order), and any other important utilities. This also included two important “temporary” objects that existed only temporarily within a large script. These temporary datasets were methodologically complex to create and were very sensitive to changes in inputs, so they seemed to merit defining as separate objects that “informed” the script that contained them. I’m not sure how consistent that categorization is, but it was useful at the time.</p>
+<p>I stored my project in an Excel worksheet. The particularities of my project required me to document the “stage” and “substage” of each portion of the project, and also to note the location and path of each item. I added the location to the <code>path1</code> column and the actual path or link to the item in the <code>path2</code> column. This naming scheme is bad, but it worked fine for my project. I mostly had the paths and links so I could use the spreadsheet for future reference. Collecting this data on my project took some time to make sure I had written down every item. The only important thing to remember is to give each row an <code>id</code> for reference.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/node_table.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Image 1: Node table</figcaption><p></p>
+</figure>
+</div>
+<p>I then documented the binary “from-to” relationships of each node in a new sheet. This sheet had four columns, but the only two that matter are the <code>from</code> and <code>to</code> columns, because the other two are filled with a quick <code>=XLOOKUP()</code> call so that I as a user could better track what I was doing.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/edge_table.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Image 2: Edge table</figcaption><p></p>
+</figure>
+</div>
+<p>This spreadsheet served well to document the nodes and edges of my project. You may prefer using .csv files so their changes can be tracked more closely with git, but I found the ease of Excel preferable.</p>
+</section>
+<section id="rendering-my-real-life-example" class="level2">
+<h2 class="anchored" data-anchor-id="rendering-my-real-life-example">Rendering my real-life example</h2>
+<p>Having source data to pull from, I can now create a diagram of my project. I pull the data from my Excel document using <code>readxl::readxlsx</code>. Then I mutate the nodes dataframe to add aesthetic mappings. This mutate also includes a <code>paste()</code> call to construct the string for each individual node that defines the title, color, and shape of each node. Unique in this case is my use of two attributes for the node name, separated by a newline character. I use each row’s <code>substage</code> and <code>name</code> values to create an entity’s node name. I then construct the graph string argument by collapsing the node and edge dataframes using <code>summarize()</code> then combining them with the other portions of the string value which <code>grViz()</code> expects. I then render the image. This chunk has some commented-out examples of how you could render a high-quality version of this image and save it to .pdf and .png using a combination of <code>DiagrammeRsvg</code> and <code>rsvg</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DiagrammeR)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DiagrammeRsvg) <span class="co"># exporting to svg improves output resolution</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsvg) <span class="co"># helps handle svg</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># file</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>xl <span class="ot">&lt;-</span> <span class="st">"data/diagram_data.xlsx"</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># import graph relationship data</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>nodesdf <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(xl, <span class="at">sheet =</span> <span class="st">'Nodes'</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>edgesdf <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(xl, <span class="at">sheet =</span> <span class="st">'Edges'</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># add additional node attributes to initial node df</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>nodesdf <span class="ot">&lt;-</span> nodesdf <span class="sc">%&gt;%</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># adding shapes as a case of the file 'type'</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">shape =</span> <span class="fu">case_when</span>(</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">==</span> <span class="st">'script'</span> <span class="sc">~</span> <span class="st">'rectangle'</span>,</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'prepped'</span>, <span class="st">'final'</span>) <span class="sc">~</span> <span class="st">'cylinder'</span>,</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'util'</span>, <span class="st">'intermediate'</span>, <span class="st">'temp'</span>) <span class="sc">~</span> <span class="st">'oval'</span>,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'source'</span>, <span class="st">'link'</span>) <span class="sc">~</span> <span class="st">'folder'</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># adding colors based on type and origin</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">case_when</span>(</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">==</span> <span class="st">'script'</span> <span class="sc">~</span> <span class="st">'white'</span>,</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">==</span> <span class="st">'temp'</span> <span class="sc">~</span> <span class="st">'yellow'</span>,</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">==</span> <span class="st">'prepped'</span> <span class="sc">~</span> <span class="st">'grey'</span>,</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">==</span> <span class="st">'final'</span> <span class="sc">~</span> <span class="st">'greenyellow'</span>,</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">==</span> <span class="st">'link'</span> <span class="sc">~</span> <span class="st">'beige'</span>,</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>      path1 <span class="sc">==</span> <span class="st">'sharepoint'</span> <span class="sc">~</span> <span class="st">'cyan'</span>,</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>      type <span class="sc">==</span> <span class="st">'intermediate'</span> <span class="sc">~</span> <span class="st">'salmon'</span>,</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">'plum'</span> <span class="co"># this applies to intermediate utilities, mainly</span></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># define the labels</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">node_label =</span> <span class="fu">paste0</span>(</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>      <span class="st">'tab'</span>,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>      id,</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>      <span class="st">' [label = </span><span class="sc">\'</span><span class="st">'</span>,</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>      substage,</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>      <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>      name,</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>      <span class="st">'</span><span class="sc">\'</span><span class="st">, shape = '</span>,</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>      shape,</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>      <span class="st">', fillcolor = '</span>,</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>      color,</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>      <span class="st">']'</span></span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="co"># create edge label string for each row</span></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>edgesdf <span class="ot">&lt;-</span> edgesdf <span class="sc">%&gt;%</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">edge_label =</span> <span class="fu">paste0</span>(</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>      <span class="st">'tab'</span>,</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>      from,</span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>      <span class="st">' -&gt; tab'</span>,</span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>      to</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="co"># define nodes string</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a><span class="co"># need \n characters for grViz()</span></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>nodestr <span class="ot">&lt;-</span> nodesdf <span class="sc">%&gt;%</span></span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">paste</span>(node_label, <span class="at">collapse =</span> <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()</span>
+<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a><span class="co"># define edges string (similar setup)</span></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>edgestr <span class="ot">&lt;-</span> edgesdf <span class="sc">%&gt;%</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">paste</span>(edge_label, <span class="at">collapse =</span> <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()</span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="co"># include some parameters then pass string literals</span></span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>graphstr <span class="ot">=</span> <span class="fu">paste</span>(</span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>  <span class="st">"digraph flowchart {</span></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="st">  node [fontname = Helvetica, style = filled]"</span>,</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>  nodestr,</span>
+<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>  edgestr,</span>
+<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>  <span class="st">'}'</span>,</span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">'</span><span class="sc">\n</span><span class="st">'</span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a><span class="co"># for debugging</span></span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="co"># writeLines(graphstr)</span></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a><span class="co"># render in R session</span></span>
+<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(graphstr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-50ef12c9c77d441fbf9c" style="width:100%;height:325px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-50ef12c9c77d441fbf9c">{"x":{"diagram":"digraph flowchart {\n  node [fontname = Helvetica, style = filled]\ntab1 [label = \"source 1\nsource sharepoint\", shape = folder, fillcolor = cyan]\ntab2 [label = \"source 1\nR script\", shape = rectangle, fillcolor = white]\ntab3 [label = \"source 1\nprepped data\", shape = cylinder, fillcolor = grey]\ntab4 [label = \"source 2\nsource link\", shape = folder, fillcolor = beige]\ntab5 [label = \"source 2\nintermediate data\", shape = oval, fillcolor = salmon]\ntab6 [label = \"source 2\nR script\", shape = rectangle, fillcolor = white]\ntab7 [label = \"source 2\nprepped wide\", shape = cylinder, fillcolor = grey]\ntab8 [label = \"source 2\nprepped long\", shape = cylinder, fillcolor = grey]\ntab9 [label = \"source 3\nsource link\", shape = folder, fillcolor = beige]\ntab10 [label = \"source 3\nintermediate\", shape = oval, fillcolor = salmon]\ntab11 [label = \"source 3\nR script\", shape = rectangle, fillcolor = white]\ntab12 [label = \"source 3\nprepped data\", shape = cylinder, fillcolor = grey]\ntab13 [label = \"source 4\nR script\", shape = rectangle, fillcolor = white]\ntab14 [label = \"source 4\ndict\", shape = oval, fillcolor = plum]\ntab15 [label = \"source 4\nStata script\", shape = rectangle, fillcolor = white]\ntab16 [label = \"source 4\nsource sharepoint\", shape = folder, fillcolor = cyan]\ntab17 [label = \"source 4\nprepped data\", shape = cylinder, fillcolor = grey]\ntab18 [label = \"source 5\nsource sharepoint\", shape = folder, fillcolor = cyan]\ntab19 [label = \"source 5\nStata script\", shape = rectangle, fillcolor = white]\ntab20 [label = \"source 5\nprepped data\", shape = cylinder, fillcolor = grey]\ntab21 [label = \"source 6\nmain data\", shape = folder, fillcolor = cyan]\ntab22 [label = \"source 6\ndata supplement\", shape = folder, fillcolor = cyan]\ntab23 [label = \"source 6\nStata script\", shape = rectangle, fillcolor = white]\ntab24 [label = \"source 6\nprepped data\", shape = cylinder, fillcolor = grey]\ntab25 [label = \"source 7\ndata1\", shape = folder, fillcolor = cyan]\ntab26 [label = \"source 7\ndata2\", shape = folder, fillcolor = cyan]\ntab27 [label = \"source 7\ndata3\", shape = folder, fillcolor = cyan]\ntab28 [label = \"source 7\nStata script 0\", shape = rectangle, fillcolor = white]\ntab29 [label = \"source 7\n2017 data_combined\", shape = oval, fillcolor = salmon]\ntab30 [label = \"source 7\nStata script 1\", shape = rectangle, fillcolor = white]\ntab31 [label = \"source 7\nprepped\", shape = cylinder, fillcolor = grey]\ntab32 [label = \"source 8\nsource\", shape = folder, fillcolor = cyan]\ntab33 [label = \"source 8\nscript\", shape = rectangle, fillcolor = white]\ntab34 [label = \"source 8\nprepped\", shape = cylinder, fillcolor = grey]\ntab35 [label = \"final-scripts\nstata 0-prep-main\", shape = rectangle, fillcolor = white]\ntab36 [label = \"final-scripts\nstata 1-prep-data\", shape = rectangle, fillcolor = white]\ntab37 [label = \"final-scripts\nstata 2-prep-weight\", shape = rectangle, fillcolor = white]\ntab38 [label = \"final-scripts\nstata 3-benchmark\", shape = rectangle, fillcolor = white]\ntab39 [label = \"final-scripts\ntmp1\", shape = oval, fillcolor = yellow]\ntab40 [label = \"final-scripts\ntmp2\", shape = oval, fillcolor = yellow]\ntab41 [label = \"final-data\ndraft dataset 1\", shape = oval, fillcolor = salmon]\ntab42 [label = \"final-data\ndraft dataset 2\", shape = oval, fillcolor = salmon]\ntab43 [label = \"final-data\nweighted data\", shape = cylinder, fillcolor = greenyellow]\ntab44 [label = \"final-data\ndata1 final\", shape = cylinder, fillcolor = greenyellow]\ntab45 [label = \"final-data\ndata2 final\", shape = cylinder, fillcolor = greenyellow]\ntab46 [label = \"utils\nmake-vars\", shape = rectangle, fillcolor = white]\ntab47 [label = \"utils\nshare-data\", shape = rectangle, fillcolor = white]\ntab48 [label = \"utils\nR package with data\", shape = oval, fillcolor = plum]\ntab1 -> tab2\ntab2 -> tab3\ntab4 -> tab6\ntab6 -> tab5\ntab5 -> tab6\ntab6 -> tab7\ntab6 -> tab8\ntab9 -> tab11\ntab11 -> tab10\ntab10 -> tab11\ntab11 -> tab12\ntab13 -> tab14\ntab14 -> tab15\ntab16 -> tab15\ntab15 -> tab17\ntab18 -> tab19\ntab19 -> tab20\ntab21 -> tab23\ntab22 -> tab23\ntab23 -> tab24\ntab25 -> tab28\ntab26 -> tab28\ntab27 -> tab28\ntab28 -> tab29\ntab29 -> tab30\ntab30 -> tab31\ntab32 -> tab33\ntab33 -> tab34\ntab24 -> tab39\ntab20 -> tab39\ntab24 -> tab40\ntab17 -> tab40\ntab24 -> tab35\ntab39 -> tab35\ntab40 -> tab35\ntab12 -> tab35\ntab3 -> tab35\ntab7 -> tab35\ntab8 -> tab35\ntab35 -> tab41\ntab41 -> tab36\ntab31 -> tab36\ntab36 -> tab42\ntab34 -> tab37\ntab17 -> tab37\ntab41 -> tab38\ntab42 -> tab38\ntab38 -> tab44\ntab38 -> tab45\ntab37 -> tab43\ntab46 -> tab35\ntab46 -> tab36\ntab43 -> tab47\ntab44 -> tab47\ntab45 -> tab47\ntab48 -> tab2\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>The DiagrammeR package doesn’t support “legends” for rendered graph images. This is no problem; because my shapes and colors are coming from just a few columns, I can make a second dataframe drawing only from those important columns, then select only unique rows using <code>distinct()</code>. I can then use nearly the same workflow as above to produce a legend that visually shows what each shape and color combination represent.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create legend df for unique color/shape combos</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>legend <span class="ot">&lt;-</span> nodesdf <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(color, shape, type, path1) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">row_number</span>(),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend_label =</span> <span class="fu">paste0</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">'tab'</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>      id,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">' [label = </span><span class="sc">\'</span><span class="st">'</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">'type: '</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>      type,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>      <span class="st">'path: '</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>      path1,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">'</span><span class="sc">\'</span><span class="st">, shape = '</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>      shape,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">', fillcolor = '</span>,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>      color,</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">']'</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co"># collapse into grviz-compatable string</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>legendstr <span class="ot">&lt;-</span> legend <span class="sc">%&gt;%</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">paste</span>(legend_label, <span class="at">collapse =</span> <span class="st">'</span><span class="sc">\n</span><span class="st">'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.character</span>()</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="co"># create grviz string</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>legendgraphstr <span class="ot">=</span> <span class="fu">paste</span>(</span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"digraph {</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="st">  node [fontname = Helvetica, style = filled]"</span>,</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  legendstr,</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="st">';}'</span>,</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">'</span><span class="sc">\n</span><span class="st">'</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a><span class="co"># for debugging</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a><span class="co"># writeLines(legendgraphstr)</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a><span class="co"># render in RStudio viewer</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(legendgraphstr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-df838baa302d89f227b6" style="width:100%;height:325px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-df838baa302d89f227b6">{"x":{"diagram":"digraph {\n  node [fontname = Helvetica, style = filled]\ntab1 [label = \"type: source\npath: sharepoint\", shape = folder, fillcolor = cyan]\ntab2 [label = \"type: script\npath: project\", shape = rectangle, fillcolor = white]\ntab3 [label = \"type: prepped\npath: project\", shape = cylinder, fillcolor = grey]\ntab4 [label = \"type: link\npath: internet\", shape = folder, fillcolor = beige]\ntab5 [label = \"type: intermediate\npath: project\", shape = oval, fillcolor = salmon]\ntab6 [label = \"type: util\npath: project\", shape = oval, fillcolor = plum]\ntab7 [label = \"type: temp\npath: na\", shape = oval, fillcolor = yellow]\ntab8 [label = \"type: final\npath: project\", shape = cylinder, fillcolor = greenyellow]\ntab9 [label = \"type: util\npath: internet\", shape = oval, fillcolor = plum]\n;}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>Note that, in the above renderings, there are tooltips for each node titled “node1” “node2” etc.</p>
+</section>
+<section id="exporting-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="exporting-diagrams">Exporting Diagrams</h2>
+<p>The DiagrammeR package sometimes struggles to export high-quality images outside of the rendering that occurs in your RStudio session. Using the <code>DiagrammeRsvg</code> and <code>rsvg</code> packages, you can save high quality diagram renderings to many formats. First, render the diagram with <code>grViz()</code>, then use <code>export_svg()</code> to turn that image to an svg object, then convert the svg string to raw data with <code>charToRaw()</code>, then save the object with an <code>rsvg</code> function. Below is an example of exporting both the diagram and a legend to both .pdf and .png formats.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export to high quality pdf from svg</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(graphstr) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">export_svg</span>() <span class="sc">%&gt;%</span> <span class="fu">charToRaw</span>() <span class="sc">%&gt;%</span> <span class="fu">rsvg_pdf</span>(<span class="st">"output/diagram.pdf"</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># export to high quality png from svg</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(graphstr) <span class="sc">%&gt;%</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">export_svg</span>() <span class="sc">%&gt;%</span> <span class="fu">charToRaw</span>() <span class="sc">%&gt;%</span> <span class="fu">rsvg_png</span>(<span class="st">"output/diagram.png"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># export to high quality pdf from svg</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(legendgraphstr) <span class="sc">%&gt;%</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  export_svg <span class="sc">%&gt;%</span> charToRaw <span class="sc">%&gt;%</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rsvg_pdf</span>(<span class="st">"output/diagram-legend.pdf"</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># export to high quality png from svg</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="fu">grViz</span>(legendgraphstr) <span class="sc">%&gt;%</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  export_svg <span class="sc">%&gt;%</span> charToRaw <span class="sc">%&gt;%</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rsvg_png</span>(<span class="st">"output/diagram-legend.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And here is the high-quality .png output of the main graph diagram:</p>
+<p><img src="output/diagram.png" class="img-fluid"></p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Rendering a project in a directed graph like this was very helpful for me. I understood how scripts worked together. I had a better idea what “downstream” scripts needed a spot check when a data source updated. I knew which portions of the repository I could leave alone and which parts would be more “sensitive” to changes in variable names, years, and formats.</p>
+<p>I don’t think the code I wrote is very pretty. I think it would be a cleaner and more flexible approach to use my input data to create a graph object with <code>DiagrammeR</code>, then use functions apart from Graphviz to render the graphs. My weird string-creating functions serve as an exercize in technological debt; they aren’t immediately intuitive to other users, and maintaining them would have small marginal returns compared to just using the normal node aesthetic functions <code>DiagrammeR</code> provides. Nevertheless, I technically succeeded in my goal of flexibly rendering this one project’s repository. That was, after all, my goal.</p>
+<p>So far, I have not been able to find other projects where R users create images in <code>DiagrammeR</code> without manually typing everything in a Graphviz statement. My goal is to avoid that and rather make the diagram part somewhat automatic so people like me can focus on the documentation of our projects.</p>
+<p>I am no expert in graphs, I just think they’re neat. I don’t understand them very well, but discrete math topics like topology and graph theory fascinate me and make me curious about what tools I now lack which could make my work easier and more conceptually clear.</p>
+<p>If, one day, I refine this workflow better, I will try to share the R project which defines the necessary functions to render a project.</p>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further reading</h2>
+<p>Documentation for <code>DiagrammeR</code> can be found <a href="http://rich-iannone.github.io/DiagrammeR/">here</a>.</p>
+<p>Specific information on Graphviz functionalities in <code>DiagrammeR</code> can be found <a href="http://rich-iannone.github.io/DiagrammeR/graphviz_and_mermaid.html">here</a>.</p>
+<p>The blog I linked above which discusses using data science to analyze Twitch streamers is <a href="https://towardsdatascience.com/twitchverse-a-network-analysis-of-twitch-universe-using-neo4j-graph-data-science-d7218b4453ff">here</a>.</p>
+<p>A very neat blog about using <code>DiagrammeR</code> which discusses more complicated graphs (including “subgraphs”) can be found <a href="https://sesync-ci.github.io/blog/visualization-with-diagrammeR.html">here</a>.</p>
+<p>The source code for this blog can be found at <a href="https://github.com/bristowrichards/blog">my GitHub</a>.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div quarto-reuse="quarto-reuse" class="quarto-appendix-contents"><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">https://creativecommons.org/licenses/by/4.0/</a></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

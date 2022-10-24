@@ -1,0 +1,21 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/bristowrichards
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/bristow-richards/
+    - icon: github
+      text: Github
+      href: https://github.com/bristowrichards
+
+---
+
+I'm a student of policy and lover of math. Currently, I'm at CMU studying for an MS in Public Policy and Management. I hope to work in DC in policy, doing research and data analysis. 
+
+I feel compelled to read Wikipedia until I know everything. Please send me your favorite niche articles! 

@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Bristow Richards"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/bristowrichards
+      - icon: twitter
+        href: https://twitter.com/bristowrichards
+      - icon: linkedin
+        href: https://www.linkedin.com/in/bristow-richards/
+format:
+  html:
+    theme: lux
+    css: styles.css
+
+
+

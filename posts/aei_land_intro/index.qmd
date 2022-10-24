@@ -1,0 +1,58 @@
+---
+title: "Can we measure the price of land?"
+subtitle: | 
+  Exploring AEI's Land Price Indicator experimental data
+date: "2022-09-25"
+format: 
+  html:
+    fig-width: 8
+    fig-height: 4
+    code-fold: false
+execute:
+  freeze: auto
+image: output/diagram.png
+categories: [data]
+draft: true
+---
+
+## What goes into home prices, anyway?
+
+The price of a house is determined in part by the cost of the structure itself and the cost of the land upon which the structure is built. Of course, there are so many factors that affect the market for housing (new construction starts, time to finish construction, supply chain, labor costs, immigration, and interest rates, to name a few).
+
+## Background
+
+[link](https://www.aei.org/housing/land-price-indicators/)
+
+```{r}
+library(openxlsx)
+df = read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=6)
+
+```
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+cbsa = read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=3)
+```
+
+
+```{r}
+state = read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=2)
+```
+
+
+```{r}
+
+ggplot(data = state) +  
+  geom_line(
+    aes(x = Year,
+        y = Land.Share.of.Property.Value,
+        color = State)
+  )
+
+
+```
+

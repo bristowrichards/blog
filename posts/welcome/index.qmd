@@ -1,0 +1,17 @@
+---
+title: "Welcome!"
+subtitle: | 
+  I'm starting a blog. Mediocre data takes to come.
+date: "2022-10-01"
+categories: [news]
+---
+
+My name is Bristow. I studied political science in undergrad. I did what many college students do, which is to put "proficient in Microsoft Excel" on my resume despite that statement being a lie. I didn't think that would really be relevant in the long run. I was wrong!
+
+I accidentally started a career in data analytics by taking an Americorps VISTA position with Habitat for Humanity International in Atlanta. I worked data jobs with Atlanta nonprofits for two years. I self-taught a lot of R and SQL. Here's my obligatory iris graphic, by the way.
+
+![](iris_data.png "I made this using sample code from the iris data Wikipedia page. You can try it yourself!")
+
+With a stagnant job market and nothing but free time on my hands in late 2020, I applied to graduate programs and started studying at Carnegie Mellon University for a Master of Science Public Policy and Management. There, I've continued to learn a lot about R, Python, SQL, visualization tools, dashboard software, and data mining approaches. 
+
+I hope to use this space to share things I'm trying to learn, my appreciation of R, and my love-hate relationship with Excel. Cheers!
