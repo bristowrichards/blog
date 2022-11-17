@@ -2,7 +2,7 @@
 title: "Can we measure the price of land?"
 subtitle: | 
   Exploring AEI's Land Price Indicator experimental data
-date: "2022-09-25"
+date: "2022-11-18"
 format: 
   html:
     fig-width: 8
@@ -15,34 +15,69 @@ categories: [data]
 draft: true
 ---
 
-## What goes into home prices, anyway?
-
-The price of a house is determined in part by the cost of the structure itself and the cost of the land upon which the structure is built. Of course, there are so many factors that affect the market for housing (new construction starts, time to finish construction, supply chain, labor costs, immigration, and interest rates, to name a few).
-
-## Background
-
-[link](https://www.aei.org/housing/land-price-indicators/)
-
-```{r}
-library(openxlsx)
-df = read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=6)
-
-```
-
-```{r}
+```{r, include=FALSE, message=FALSE}
 library(tidyverse)
 ```
 
+I've been ill and also using too much Python for work so I wanted a short exercise in R.
+
+## What goes into home prices, anyway?
+
+The price of a house is determined in part by the cost of the structure itself and the cost of the land upon which the structure is built. Of course, there are so many factors that affect those two inputs (construction supply, labor costs, and mortgage rates, to name a few). While the price of homes can me measured through valuations and transactions, the price of the land itself is harder to grasp.
+
+## Background
+
+A team of researchers associated with Rutgers, the American Enterprise Institute, and the Federal Housing Finance Agency have attempted to measure variations in home price over the years to capture
+
+[link](https://www.aei.org/housing/land-price-indicators/)
+
+# Loading the data
+
+The data download is a large Microsoft Excel file with sheets that measure different geographies, from national aggregates down to the census tract level. I will start with ZIP codes because the census tract data is sparse, with many tracts missing data entirely. Tracts are small! While I load the data, I'll rename some complicated column names, and change one column from text to boolean.
 
 ```{r}
-cbsa = read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=3)
+xl = "https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208"
+zip_codes = openxlsx::read.xlsx( # using 
+    xl, 
+    sheet=5, # zip code sheet 
+    cols = 1:7 # ignore note
+  ) %>% # I love R pipes :)
+  rename(
+    Land.Value = "Land.Value.(Per.Acre,.As-Is)",
+    Std.Land.Value = "Land.Value.(1/4.Acre.Lot,.Standardized)",
+    Land.Percent = "Land.Share.of.Property.Value",
+    HPA = "Home.Price.Appreciation.(HPA)",
+    Imputed = "Land.Share.Imputed?"
+  ) %>%
+  mutate( # this might not save much memory but feels appropriate
+    Imputed = ifelse(Imputed == "Y", TRUE, FALSE)
+  )
+
+summary(zip_codes)
 ```
 
+This is a lot of information that I'd like to investigate, but I don't have any background on real estate economics. For now, I'd like visualize all the place I call home *(it would be a bad idea to post my address on the internet, right?)*. Lets look at ZIP code `15217`.
 
 ```{r}
-state = read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=2)
+zip_codes %>%
+  filter(ZIP.Code == "15217") %>% 
+  ggplot(data=., aes(x=Year)) +
+  geom_col(aes(y=Std.Land.Value), fill="#299c5e") +
+  labs(y = "Standardized Land Value",
+       title = "Land Price Appreciation in the ZIP code 15217") +
+  scale_x_continuous(breaks = 2012:2020) +
+  geom_line(aes(y=Land.Percent*3e5), size=1.5, color="red", group=1) +
+  scale_y_continuous(sec.axis = sec_axis(~./3e5, name = "Land Share of Value")) +
+  theme_classic()
 ```
 
+```{r}
+# cbsa = read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=3)
+```
+
+```{r}
+state = openxlsx::read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=2)
+```
 
 ```{r}
 
@@ -56,3 +91,4 @@ ggplot(data = state) +
 
 ```
 
+More reading at Joey Politano's blog [here](https://www.apricitas.io/p/americas-fractured-housing-market).
