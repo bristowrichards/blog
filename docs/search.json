@@ -11,7 +11,14 @@
     "href": "index.html",
     "title": "quarto-blog",
     "section": "",
-    "text": "A messy workflow for inheriting a messy data project\n\n\n\n\nproject management\n\n\n\n\n\n\n\n\n\n\n\nOct 24, 2022\n\n\nBristow Richards\n\n\n\n\n\n\n  \n\n\n\n\n\nI’m starting a blog. Mediocre data takes to come.\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nOct 1, 2022\n\n\nBristow Richards\n\n\n\n\n\n\nNo matching items"
+    "text": "I want to practice simulation and optimization in R. I’ll use real estate to do so.\n\n\n\n\nreal estate\n\n\nsimulation\n\n\n\n\n\n\n\n\n\n\n\nDec 17, 2022\n\n\nBristow Richards\n\n\n\n\n\n\n  \n\n\n\n\n\nA messy workflow for inheriting a messy data project\n\n\n\n\nproject management\n\n\n\n\n\n\n\n\n\n\n\nOct 24, 2022\n\n\nBristow Richards\n\n\n\n\n\n\n  \n\n\n\n\n\nI’m starting a blog. Mediocre data takes to come.\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nOct 1, 2022\n\n\nBristow Richards\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "Bristow Richards",
+    "section": "",
+    "text": "Copyright (c) 2022 Bristow Richards\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
   },
   {
     "objectID": "posts/diagram1/index.html",
@@ -84,17 +91,52 @@
     "text": "Further reading\nDocumentation for DiagrammeR can be found here.\nSpecific information on Graphviz functionalities in DiagrammeR can be found here.\nThe blog I linked above which discusses using data science to analyze Twitch streamers is here.\nA very neat blog about using DiagrammeR which discusses more complicated graphs (including “subgraphs”) can be found here.\nThe source code for this blog can be found at my GitHub."
   },
   {
+    "objectID": "posts/real_estate_0/index.html",
+    "href": "posts/real_estate_0/index.html",
+    "title": "Real Estate Valuation with R: Introduction",
+    "section": "",
+    "text": "This semester, I took a Real Estate Development class because I thought I would learn about affordable housing. I didn’t learn about affordable housing, but I did learn how capitalists think about land. I’m not an accountant and don’t have much of an interest in the world of commercial real estate valuation, but I enjoyed the final project: whether to purchase a for-sale office building, and what to do with it."
+  },
+  {
+    "objectID": "posts/real_estate_0/index.html#scoping-the-problem",
+    "href": "posts/real_estate_0/index.html#scoping-the-problem",
+    "title": "Real Estate Valuation with R: Introduction",
+    "section": "Scoping the Problem",
+    "text": "Scoping the Problem\nModeling the problem was not hard. The question at hand is: how much money can you make? We had soft constraints too, such as a desire to have affordable housing in the downtown Pittsburgh neighborhood and a desire to maintain the historic facade of the building to contribute a beautiful aesthetic to the neighborhood. That second part was a lie, we wanted a historic tax credit for money.\n\n\n\nDowntown Pittsburgh - Matt Evans, Flickr\n\n\nThis could be a large optimization problem: maximize returns / minimize cost given certain parameters and certain integer decision making variables. Apartments make a certain amount per unit, but also the decision to have a single apartment brings about fixed costs, so it might be best to do zero units or 60 units instead of something in between."
+  },
+  {
+    "objectID": "posts/real_estate_0/index.html#the-modeling",
+    "href": "posts/real_estate_0/index.html#the-modeling",
+    "title": "Real Estate Valuation with R: Introduction",
+    "section": "The modeling",
+    "text": "The modeling\nThe whole thing could be modeled easily in a spreadsheet. I love to hate spreadsheets for lack of reproducibility and transparency of calculations, but it went really well. We had two sheets: a pro forma of the costs, revenue, stable operating income, and value at the end of the project. We had a second sheet with all of our parameters: size of new apartments, lease per square foot of retail, interest rate for our loan, and the different vacancy rates for different types of floors, to give some examples.\nNot all of these parameters are known. Some are decisions: we can set apartment prices, we can allocate more or less floor space to retail, and we know what our set land tax rates will be. However, many more parameters are unknown and must be estimates. We used fairly arbitrary numbers: 15% vacancy for retail, 7.5% exit capitalization rate, and a 1-year office fill-out period after renovation. However, these might be better understood as probabilistic values. Our vacancy for retail is estimated to be 15%. What if there’s a recession and we have a 50% vacancy? What if market dynamics change and we have to use an exit cap rate of 9.5%?"
+  },
+  {
+    "objectID": "posts/real_estate_0/index.html#the-approach-monte-carlo-simulation",
+    "href": "posts/real_estate_0/index.html#the-approach-monte-carlo-simulation",
+    "title": "Real Estate Valuation with R: Introduction",
+    "section": "The Approach: Monte Carlo Simulation",
+    "text": "The Approach: Monte Carlo Simulation\nApproaching an outcome based on a randomly distributed input is what simulation is for. If we have some output \\(Y\\) that is a function \\(Y=u(X)\\), we can calculated the expected value of \\(Y\\) by calculating:\n\\[E(Y)=E(u(X))\\]\nBy randomly simulating many instances of \\(X\\) (each instance ) in its distribution, we can simple use averages to find the expected value of \\(X\\). Selecting \\(n\\) instances of \\(X\\), each titled \\(x_i\\) for \\(i \\in \\{1,2,3,...n\\}\\), we estimate:\n\\[ \\hat\\mu = \\frac {u(x_1) + ... + u(x_n)} {n} \\approx E(u(x)) = E(Y) \\]\nSo if you have a well-defined relationship between all your randomly-distributed inputs and your output, it can be easier to replicate an instance of that function thousands of times instead of very precisely defining the relationship between the distributions of each input."
+  },
+  {
+    "objectID": "posts/real_estate_0/index.html#an-example-dice",
+    "href": "posts/real_estate_0/index.html#an-example-dice",
+    "title": "Real Estate Valuation with R: Introduction",
+    "section": "An example: dice",
+    "text": "An example: dice\nIf you want to know the expected value of rolling a dice, you could just roll a dice \\(n\\) times, summing the value for each roll \\(x_i\\) and dividing by \\(n\\) to get the final value (which should amount to 3.5).\n\n# Dice Simulation\ndice = 1:6 # outcomes for dice\nn = 10000 # number of samples\n\nset.seed(8675309) # makes this reproducible\n\nrolls = sample(\n  dice, #samples from dice\n  n, # takes n samples\n  replace=TRUE # samples with replacement\n)\n\nNow we have a list rolls which contains 10,000 outcomes of rolling a 6-sided die. We can display a histogram of outcomes to see how likely each outcome appears to have been:\n\n\nCode\nlibrary(ggplot2)\n\nggplot() + \n  aes(rolls) + \n  geom_histogram(\n    color='black',\n    bins=6\n  ) + \n  ggtitle('Dice Roll Outcomes') +\n  xlab('Roll Value') +\n  ylab('Frequency')\n\n\n\n\n\nFigure 1: Outcome of 10,000 Dice Rolls\n\n\n\n\nEverything looks in order. We rolled the die 10,000 times, and each outcome appears to have happened. We can take the average outcome for rolls to estimate the expected outcome of rolling a dice:\n\n# calculate mean outcome\nmean(rolls)\n\n[1] 3.4998\n\n\n\n\n\nThat’s pretty close! We got a value of 3.4998, which is only off by 0.0057%. Calculating the expected value of many dice rolls isn’t hard mathematically, but if the function \\(Y=u(X)\\)is very complex or if \\(X\\) contains many parameters that are hard to estimate, simulation becomes much easier than precise calculations. That’s where simulation will tie in to our real estate valuation project."
+  },
+  {
+    "objectID": "posts/real_estate_0/index.html#the-plan",
+    "href": "posts/real_estate_0/index.html#the-plan",
+    "title": "Real Estate Valuation with R: Introduction",
+    "section": "The plan",
+    "text": "The plan\nIn the next few posts, I’d like to introduce my real estate project and the very basic financial model behind it. Then, I’d like to expand that model by using Monte Carlo simulation to give better overall estimates for the value of the building. After that’s complete, I’d like to apply simple optimization to the project to see if we can estimate, with known parameters, what plan for the building would prove to make the most money. I don’t know much about real estate, but the project itself is simple enough to model, complicated enough to require advanced technical approaches, and applicable enough to the real world that the modeling will require me to explicitly scope the problems, goals, constraints, and implications of whatever decision is made.\nUp next: the pro forma."
+  },
+  {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
     "title": "Welcome!",
     "section": "",
     "text": "I accidentally started a career in data analytics by taking an Americorps VISTA position with Habitat for Humanity International in Atlanta. I worked data jobs with Atlanta nonprofits for two years. I self-taught a lot of R and SQL. Here’s my obligatory iris graphic, by the way.\n\nWith a stagnant job market and nothing but free time on my hands in late 2020, I applied to graduate programs and started studying at Carnegie Mellon University for a Master of Science Public Policy and Management. There, I’ve continued to learn a lot about R, Python, SQL, visualization tools, dashboard software, and data mining approaches.\nI hope to use this space to share things I’m trying to learn, my appreciation of R, and my love-hate relationship with Excel. Cheers!\n\n\n\nReusehttps://creativecommons.org/licenses/by/4.0/"
-  },
-  {
-    "objectID": "LICENSE.html",
-    "href": "LICENSE.html",
-    "title": "Bristow Richards",
-    "section": "",
-    "text": "Copyright (c) 2022 Bristow Richards\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
   }
 ]
