@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Bristow Richards">
-<meta name="dcterms.date" content="2022-09-25">
+<meta name="dcterms.date" content="2022-11-18">
 
 <title>Bristow Richards - Can we measure the price of land?</title>
 <style>
@@ -186,7 +186,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 25, 2022</p>
+        <p class="date">November 18, 2022</p>
       </div>
     </div>
       
@@ -202,6 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#what-goes-into-home-prices-anyway" id="toc-what-goes-into-home-prices-anyway" class="nav-link active" data-scroll-target="#what-goes-into-home-prices-anyway">What goes into home prices, anyway?</a></li>
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#loading-the-data" id="toc-loading-the-data" class="nav-link" data-scroll-target="#loading-the-data">Loading the data</a></li>
   </ul>
 </nav>
 </nav>
@@ -214,35 +215,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+<p>I’ve been ill and also using too much Python for work so I wanted a short exercise in R.</p>
 <section id="what-goes-into-home-prices-anyway" class="level2">
 <h2 class="anchored" data-anchor-id="what-goes-into-home-prices-anyway">What goes into home prices, anyway?</h2>
-<p>The price of a house is determined in part by the cost of the structure itself and the cost of the land upon which the structure is built. Of course, there are so many factors that affect the market for housing (new construction starts, time to finish construction, supply chain, labor costs, immigration, and interest rates, to name a few).</p>
+<p>The price of a house is determined in part by the cost of the structure itself and the cost of the land upon which the structure is built. Of course, there are so many factors that affect those two inputs (construction supply, labor costs, and mortgage rates, to name a few). While the price of homes can me measured through valuations and transactions, the price of the land itself is harder to grasp.</p>
 </section>
 <section id="background" class="level2">
 <h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>A team of researchers associated with Rutgers, the American Enterprise Institute, and the Federal Housing Finance Agency have attempted to measure variations in home price over the years to capture</p>
 <p><a href="https://www.aei.org/housing/land-price-indicators/">link</a></p>
+</section>
+<section id="loading-the-data" class="level1">
+<h1>Loading the data</h1>
+<p>The data download is a large Microsoft Excel file with sheets that measure different geographies, from national aggregates down to the census tract level. I will start with ZIP codes because the census tract data is sparse, with many tracts missing data entirely. Tracts are small! While I load the data, I’ll rename some complicated column names, and change one column from text to boolean.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(openxlsx)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.xlsx</span>(<span class="st">"https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208"</span>,<span class="at">sheet=</span><span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>xl <span class="ot">=</span> <span class="st">"https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>zip_codes <span class="ot">=</span> openxlsx<span class="sc">::</span><span class="fu">read.xlsx</span>( <span class="co"># using </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    xl, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sheet=</span><span class="dv">5</span>, <span class="co"># zip code sheet </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span> <span class="co"># ignore note</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="co"># I love R pipes :)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Land.Value =</span> <span class="st">"Land.Value.(Per.Acre,.As-Is)"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Std.Land.Value =</span> <span class="st">"Land.Value.(1/4.Acre.Lot,.Standardized)"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Land.Percent =</span> <span class="st">"Land.Share.of.Property.Value"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">HPA =</span> <span class="st">"Home.Price.Appreciation.(HPA)"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Imputed =</span> <span class="st">"Land.Share.Imputed?"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="co"># this might not save much memory but feels appropriate</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Imputed =</span> <span class="fu">ifelse</span>(Imputed <span class="sc">==</span> <span class="st">"Y"</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(zip_codes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ZIP.Code              Year        Land.Value       Std.Land.Value   
+ Length:162909      Min.   :2012   Min.   : -211100   Min.   : -35000  
+ Class :character   1st Qu.:2014   1st Qu.:   94600   1st Qu.:  38300  
+ Mode  :character   Median :2016   Median :  221100   Median :  77400  
+                    Mean   :2016   Mean   :  658052   Mean   : 155744  
+                    3rd Qu.:2018   3rd Qu.:  567100   3rd Qu.: 164100  
+                    Max.   :2020   Max.   :48410200   Max.   :4906000  
+                                   NA's   :28818      NA's   :28818    
+  Land.Percent          HPA         Imputed       
+ Min.   :-0.6170   Min.   :0.743   Mode :logical  
+ 1st Qu.: 0.2440   1st Qu.:1.065   FALSE:69642    
+ Median : 0.3550   Median :1.206   TRUE :26433    
+ Mean   : 0.3666   Mean   :1.277   NA's :66834    
+ 3rd Qu.: 0.4770   3rd Qu.:1.419                  
+ Max.   : 0.9400   Max.   :3.524                  
+                                                  </code></pre>
+</div>
+</div>
+<p>This is a lot of information that I’d like to investigate, but I don’t have any background on real estate economics. For now, I’d like visualize all the place I call home <em>(it would be a bad idea to post my address on the internet, right?)</em>. Lets look at ZIP code <code>15217</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>zip_codes <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(ZIP.Code <span class="sc">==</span> <span class="st">"15217"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">data=</span>., <span class="fu">aes</span>(<span class="at">x=</span>Year)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y=</span>Std.Land.Value), <span class="at">fill=</span><span class="st">"#299c5e"</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Standardized Land Value"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Land Price Appreciation in the ZIP code 15217"</span>) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2012</span><span class="sc">:</span><span class="dv">2020</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>Land.Percent<span class="sc">*</span><span class="fl">3e5</span>), <span class="at">size=</span><span class="fl">1.5</span>, <span class="at">color=</span><span class="st">"red"</span>, <span class="at">group=</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span>.<span class="sc">/</span><span class="fl">3e5</span>, <span class="at">name =</span> <span class="st">"Land Share of Value"</span>)) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="768"></p>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-✔ tibble  3.1.8     ✔ dplyr   1.0.9
-✔ tidyr   1.2.0     ✔ stringr 1.4.0
-✔ readr   2.1.2     ✔ forcats 0.5.1
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cbsa = read.xlsx("https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208",sheet=3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cbsa <span class="ot">=</span> <span class="fu">read.xlsx</span>(<span class="st">"https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208"</span>,<span class="at">sheet=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>state <span class="ot">=</span> <span class="fu">read.xlsx</span>(<span class="st">"https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208"</span>,<span class="at">sheet=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>state <span class="ot">=</span> openxlsx<span class="sc">::</span><span class="fu">read.xlsx</span>(<span class="st">"https://www.aei.org/wp-content/uploads/2021/05/AEI_adjusted-Land-Data-2020-1.xlsx?x91208"</span>,<span class="at">sheet=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> state) <span class="sc">+</span>  </span>
@@ -252,9 +296,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> State)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="768"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="768"></p>
 </div>
 </div>
+<p>More reading at Joey Politano’s blog <a href="https://www.apricitas.io/p/americas-fractured-housing-market">here</a>.</p>
 
 
 </section>
