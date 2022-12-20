@@ -1,0 +1,21 @@
+---
+title: "Real Estate Valuation with R: The Pro Forma"
+subtitle: | 
+  I want to practice simulation and optimization in R. I'll use real estate to do so.
+date: "2023/01/01"
+format: 
+  html:
+    fig-width: 8
+    fig-height: 4
+    code-fold: false
+execute:
+  freeze: auto
+# image: image
+categories: [real estate]
+draft: true
+---
+
+
+
+
+lorem ipsum, baby!

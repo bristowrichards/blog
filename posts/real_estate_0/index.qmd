@@ -10,7 +10,7 @@ format:
     code-fold: false
 execute:
   freeze: auto
-image: output/diagram.png
+image: pittsburgh_evans.jpg
 categories: [real estate, simulation]
 ---
 
