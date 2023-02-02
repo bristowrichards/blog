@@ -1,0 +1,37 @@
+---
+title: "An ode to pipes"
+subtitle: | 
+  In honor of the new pipe, I'm reflecting on R's OOP principles.
+date: "2023-02-20"
+format: 
+  html:
+    fig-width: 8
+    fig-height: 4
+    code-fold: false
+execute:
+  freeze: auto
+# image: 
+categories: [etc]
+draft: true
+---
+
+## An aside: appreciating pipes
+
+One of the things that makes R special to me is the pipe operator. Initially developed in the `magrittr` package, the pipe exists to move one object into another as an argument. The `magrittr` pipe that most people are familiar with represented as `%>%` and typically comes before a new line where the expression is continued.
+
+The pipe takes the object on the left and passes it to the function on the right. It will be passed as the first argument of the function, but also can be explicitly referred to by a period character `.` if you need to access it later in the argument. Consider a workflow where we need to save a number, take its square root, round that value to three decimal places, save that number as a string, paste that string with some words, then print the result. We can do this by saving many intermediate objects:
+
+```{r pipes1}
+# without pipes, you need many objects
+a <- 2
+b <- sqrt(2)
+c <- round(b, 3)
+d <- as.character(c)
+e <- paste('my value:', d)
+print(e)
+```
+This saves many intermediate objects. This is how I often write Python. It feels wasteful to fill up my memory with objects that I don't need. Another way to do this is to have many nesting parenthesis:
+
+```{r pipes2}
+
+```
