@@ -1,0 +1,14 @@
+{
+  "hash": "f3ad76c465b688d0eb5e1639ab458f46",
+  "result": {
+    "markdown": "---\ntitle: \"An ode to pipes\"\nsubtitle: | \n  In honor of the new pipe, I'm reflecting on R's OOP principles.\ndate: \"2023-02-20\"\nformat: \n  html:\n    fig-width: 8\n    fig-height: 4\n    code-fold: false\nexecute:\n  freeze: auto\n# image: \ncategories: [etc]\ndraft: true\n---\n\n\n## An aside: appreciating pipes\n\nOne of the things that makes R special to me is the pipe operator. Initially developed in the `magrittr` package, the pipe exists to move one object into another as an argument. The `magrittr` pipe that most people are familiar with represented as `%>%` and typically comes before a new line where the expression is continued.\n\nThe pipe takes the object on the left and passes it to the function on the right. It will be passed as the first argument of the function, but also can be explicitly referred to by a period character `.` if you need to access it later in the argument. Consider a workflow where we need to save a number, take its square root, round that value to three decimal places, save that number as a string, paste that string with some words, then print the result. We can do this by saving many intermediate objects:\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# without pipes, you need many objects\na <- 2\nb <- sqrt(2)\nc <- round(b, 3)\nd <- as.character(c)\ne <- paste('my value:', d)\nprint(e)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[1] \"my value: 1.414\"\n```\n:::\n:::\n\nThis saves many intermediate objects. This is how I often write Python. It feels wasteful to fill up my memory with objects that I don't need. Another way to do this is to have many nesting parenthesis:\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
