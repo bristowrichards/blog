@@ -1,8 +1,10 @@
 library(readr)
+library(dplyr)
 
 # read data from download
+# the .txt. file is .gitignored because the file is too big!
 ratings <- read_fwf(
-  'players_list_foa.txt',
+  'quarto-blog/posts/chess_0_ggplot/players_list_foa.txt',
   col_types = 'icccccccnnnnnnnnnnf',
   skip=1
 )
@@ -31,3 +33,6 @@ ratings <- ratings |>
     Bdecade = factor(sapply(Byear, function(x) x - x %% 10)),
     Age = 2023 - Byear
   )
+
+# save
+saveRDS(ratings, file = 'quarto-blog/posts/chess_0_ggplot/ratings.Rds')

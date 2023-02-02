@@ -22,47 +22,10 @@ I have opted to use the International Chess Federation's open source data on all
 
 I wrote a quick cleaning script to remove some unwanted columns and to filter out players with null values. In particular, I filter out any player who has a standard rating of `0` or `NULL`. Check out repository sourcing this blog [here](https://github.com/bristowrichards/blog/tree/main/posts/chess_0_ggplot/) for more details.
 
-```{r}
-#| code-fold: true
-#| echo: false
-#| warning: false
-
-library(readr)
-library(dplyr)
-
-# read data from download
-ratings <- read_fwf(
-  'players_list_foa.txt',
-  col_types = 'icccccccnnnnnnnnnnf',
-  skip=1
-)
-
-# copy columns
-# needed to do this to speed up column type, which required skipping line
-# readr::read_fwf doesn't allow to specify first row as colnames
-columns = c("ID Number", "Name", "Fed", "Sex", "Tit", "WTit", "OTit", 
-            "FOA", "SRtng", "SGm", "SK", "RRtng", "RGm", "Rk", "BRtng", 
-            "BGm", "BK", "Byear", "Flag")
-
-# set column names
-colnames(ratings) <- columns
-rm(columns)
-
-# subset to columns of interest
-ratings <- ratings[,c(1:6,9,12,15,18)]
-
-# clean
-ratings <- ratings |>
-  filter(
-    SRtng > 0, # must have rating and rating must be above 0
-    Byear > 1900 # must have valid birth year
-  ) |>
-  mutate(
-    Bdecade = factor(sapply(Byear, function(x) x - x %% 10)),
-    Age = 2023 - Byear
-  )
+```{r load}
+# load data
+ratings <- readRDS('ratings.Rds')
 ```
-
 
 The data is pretty simple. I removed a few columns, then I made the `Bdecade` and `Age` columns by subtracting `Byear` from 2023 (so some people might be off by a year). Higher rated players have ratings in all three categories, but most of the data had a high degree of missingness. Of the nearly 1.2 million players represented in the data, only `r nrow(ratings) |> scales::comma_format()()` players have a rating above zero in Standard time control. Filtering for `SRtng > 0` may have been too simplistic - it's possible there exist some people who have ratings in Rapid and Bullet but not standard - but I am mostly interested in displaying Standard ratings anyways.
 
@@ -70,7 +33,11 @@ Let's look at the highest rated players in Standard time control.
 
 ```{r source}
 #| warning: false
+#| message: false
 
+library(dplyr)
+
+# show highest rated players
 ratings |> # I'm trying to use the new pipes now
   arrange(desc(SRtng)) |> 
   head(10) |> 
