@@ -1,0 +1,95 @@
+---
+title: "Intearactive Charts: R and Chess, Continued"
+subtitle: | 
+  What's a dashboard without some user input
+date: "2023-02-15"
+format: 
+  html:
+    fig-width: 8
+    fig-height: 4
+    code-fold: false
+execute:
+  freeze: auto
+# image: Ancient_Chess.jpg
+categories: [viz, chess]
+draft: true
+---
+
+One fun thing about Tableau, Power BI, and even Excel is the ability to give chart viewers a better interactive experience. Tooltips, highlighting, and editing opacity are all great ways to make the data stand out to the viewer. Just using `ggplot2`, however, results in static `.png` images that lack those nice interactive elements.
+
+Taking inspiration from [this blog post](https://alberts-newsletter.beehiiv.com/p/interactive-ggplots) by Albert Rapp, I want to expand on the charts I made in my last post about FIDE player ratings data. 
+
+## The data
+
+Nothing new this time; I'm still sorting from the 1.2 million players to only save those with a Standard rating above 0 Elo. This saves just around 400,000 players.
+
+```{r}
+# lets me take data from previous post so I don't save it twice
+data_path <- paste0(
+  dirname(getwd()), # this refers to the parent directory
+  '/chess_0_ggplot/ratings.Rds' 
+)
+
+ratings <- readRDS(data_path)
+```
+
+## Comparing Countries
+
+To make things simple at first, I'd like to return to the `geom_freqpoly()` chart from my previous post. This lets us compare countries (more specifically, federations) by showing their distributions which still showing the difference in overall size of the federation player population.
+
+```{r}
+#| warning: false
+#| code-fold: true
+
+library(ggplot2)
+library(dplyr)
+
+my_countries <- c('USA', 'RUS', 'IND', 'FRA', 'ARG')
+
+ratings |> 
+  filter(is.element(Fed, my_countries)) |> 
+  ggplot(aes(x = SRtng, color = Fed)) +
+  geom_freqpoly(bins = 50, linewidth = 2, alpha = 0.8) +
+  scale_color_viridis_d(end = 0.9) +
+  scale_y_continuous(label = scales::comma) +
+  xlab(NULL) +
+  ylab(NULL) +
+  labs(
+    title = 'Standard Elo Ratings, Frequency',
+    caption = 'Data: FIDE, January 2023\nViz: @bristowrichards',
+    color = 'Federation'
+  ) +
+  theme_classic()
+```
+
+I think this is a nice plot! There is some overlap between Argentina and the USA for a portion, then Russia and France for another portion. It would be nice to be able to highlight the labels in the legend and have those lines pop out. 
+
+## Introducing: `ggiraph`
+
+The `ggiraph` package lets me alter some of the visual layers of `ggplot2` objects for new, interactive visualizations during interactive sessions. I think there are ways to make similar plots interactive in an HTML document such as this Quarto blog you're reading right now, but for now I'll stick to interactive plots in a `shiny` interface.
+
+Below shows how we would make this plot interactive:
+
+```{r}
+#| warning: false
+
+# lets make a list of plots
+plots <- list()
+
+# and append this one to that list
+plots$freqpoly <- ratings |> 
+  filter(is.element(Fed, my_countries)) |> 
+  ggplot(aes(x = SRtng, color = Fed)) +
+  geom_freqpoly(bins = 50, linewidth = 2, alpha = 0.8) +
+  scale_color_viridis_d(end = 0.9) +
+  scale_y_continuous(label = scales::comma) +
+  xlab(NULL) +
+  ylab(NULL) +
+  labs(
+    title = 'Standard Elo Ratings, Frequency',
+    caption = 'Data: FIDE, January 2023\nViz: @bristowrichards',
+    color = 'Federation'
+  ) +
+  theme_classic()
+```
+
